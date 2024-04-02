@@ -8,6 +8,10 @@ const Search = ({ onAddFood }) => {
     const [searchValue, setSearchValue] = useState(null);
     const [results, setResults] = useState([])
 
+    useEffect(() => {
+        handleSearch("")
+    }, [])
+
 
     const handleSearch = useDebounce(async (value) => {
         const res = await fetch(`http://localhost:3000/foods?name_like=${value}`)
@@ -33,7 +37,18 @@ const Search = ({ onAddFood }) => {
             <input value={searchValue} onChange={(e) => changedSearchValue(e)} placeholder="Start typing..." />
 
             <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Kcal</th>
+                        <th>Protein</th>
+                        <th>Carbs</th>
+                        <th>Fat</th>
+                        <th></th>
+                    </tr>
+                </thead>
                 {results.map((item) => (<FoodRow item={item} showAddButton onAdd={onAddFood} />))}
+                {results.length === 0 && <p>No results</p>}
             </table>
         </>
     )
