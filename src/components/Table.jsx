@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { React } from 'react';
+import FoodRow from './FoodRow';
 
 const Table = ({ items }) => {
 
@@ -7,6 +8,22 @@ const Table = ({ items }) => {
     const [totalProtein, setTotalProtein] = useState(0);
     const [totalCarbs, setTotalCarbs] = useState(0);
     const [totalFat, setTotalFat] = useState(0);
+
+    const round = (num) => Math.round(num * 10) / 10
+
+    useEffect(() => {
+        let kcal = 0, protein = 0, carbs = 0, fat = 0
+        items.map((item) => {
+            kcal += item.kcal
+            protein += item.protein
+            carbs += item.carbs
+            fat += item.fat
+        })
+        setTotalKcal(() => round(kcal))
+        setTotalProtein(() => round(protein))
+        setTotalCarbs(() => round(carbs))
+        setTotalFat(() => round(fat))
+    }, [items])
 
     return (
         <table>
@@ -20,15 +37,7 @@ const Table = ({ items }) => {
                 </tr>
             </thead>
             <tbody>
-                {items.length > 0 && items.map((item) => (
-                    <tr>
-                        <td>{item.name}</td>
-                        <td>{item.kcal}</td>
-                        <td>{item.protein}</td>
-                        <td>{item.carbs}</td>
-                        <td>{item.fat}</td>
-                    </tr>
-                ))}
+                {items.length > 0 && items.map((item) => <FoodRow item={item} />)}
             </tbody>
             <tfoot>
                 <tr>

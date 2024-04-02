@@ -8,7 +8,7 @@ function App() {
   const [items, setItems] = useState([]);
 
   const onAddFood = (item) => {
-    console.log(item, items)
+
     if (items.indexOf(item) === -1) {
       setItems((items) => [...items, item])
     }

@@ -41,12 +41,20 @@
             "carbs": 6
         },
         {
-            "id": "5",
-            "name": "Cabbage",
-            "kcal": 51,
+            "id": "6",
+            "name": "Carrot",
+            "kcal": 41,
             "protein": 0.6,
             "fat": 0,
-            "carbs": 11.6
+            "carbs": 10
+        },
+        {
+            "id": "7",
+            "name": "Yoghurt",
+            "kcal": 59,
+            "protein": 10,
+            "fat": 3,
+            "carbs": 3.6
         }
     ]
 }
