@@ -11,16 +11,9 @@ const Form = ({ toggleForm, onSubmit }) => {
     const [errors, setErrors] = useState([])
 
     const submit = (e) => {
+        e.preventDefault()
         setErrors([])
         let isValid = true
-        e.preventDefault()
-        const food = {
-            name,
-            kcal,
-            protein,
-            carbs,
-            fat
-        }
         if (name === null || name.length < 3) {
             setErrors((err) => [...err, 'Name should be at least 3 symbols'])
             isValid = false;
@@ -43,7 +36,13 @@ const Form = ({ toggleForm, onSubmit }) => {
         }
 
         if (isValid) {
-            onSubmit(food)
+            onSubmit({
+                name,
+                kcal,
+                protein,
+                carbs,
+                fat
+            })
         }
     }
 

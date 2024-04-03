@@ -14,10 +14,10 @@ const Table = ({ items }) => {
     useEffect(() => {
         let kcal = 0, protein = 0, carbs = 0, fat = 0
         items.map((item) => {
-            kcal += item.kcal
-            protein += item.protein
-            carbs += item.carbs
-            fat += item.fat
+            kcal += Number(item.kcal)
+            protein += Number(item.protein)
+            carbs += Number(item.carbs)
+            fat += Number(item.fat)
         })
         setTotalKcal(() => round(kcal))
         setTotalProtein(() => round(protein))

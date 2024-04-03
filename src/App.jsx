@@ -1,4 +1,3 @@
-import './App.css';
 import React, { useEffect, useState } from 'react';
 import Table from './components/Table';
 import Search from './components/Search';
