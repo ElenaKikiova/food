@@ -18,19 +18,19 @@ const Form = ({ toggleForm, onSubmit }) => {
             setErrors((err) => [...err, 'Name should be at least 3 symbols'])
             isValid = false;
         }
-        if (kcal === 0 || kcal > 1000) {
+        if (kcal < 1 || kcal > 1000) {
             setErrors((err) => [...err, 'Kcal should be in the range 0-1000'])
             isValid = false;
         }
-        if (protein > 100) {
+        if (protein < 0 || protein > 100) {
             setErrors((err) => [...err, 'Protein should be in the range 0-100'])
             isValid = false;
         }
-        if (carbs > 100) {
+        if (carbs < 0 || carbs > 100) {
             setErrors((err) => [...err, 'Carbs should be in the range 0-100'])
             isValid = false;
         }
-        if (fat > 100) {
+        if (fat < 0 || fat > 100) {
             setErrors((err) => [...err, 'Fat should be in the range 0-100'])
             isValid = false;
         }
@@ -43,6 +43,11 @@ const Form = ({ toggleForm, onSubmit }) => {
                 carbs,
                 fat
             })
+            setName("")
+            setKcal(0)
+            setProtein(0)
+            setCarbs(0)
+            setFat(0)
         }
     }
 
