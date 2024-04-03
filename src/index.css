@@ -18,6 +18,7 @@ input {
 }
 
 table {
+  margin-bottom: 1rem;
   width: 100%;
 }
 
@@ -44,4 +45,27 @@ thead {
 tfoot {
   font-weight: bold;
   background-color: skyblue
+}
+
+.toggleFormButton {
+  width: 100%;
+}
+
+form {
+  padding: 1rem;
+  border: 1px solid navy;
+  border-radius: 5px;
+  margin: 2rem 0;
+}
+
+form> label {
+  text-align: left;
+}
+
+form > input {
+  margin: 0.25rem 0 0.75rem;
+}
+
+.error {
+  color: red
 }

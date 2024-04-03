@@ -14,8 +14,8 @@ const ResultsTable = ({ results, onAddFood }) => {
                 </tr>
             </thead>
             <tbody>
-                {results.map((item) => (<FoodRow item={item} showAddButton onAdd={onAddFood} />))}
-                {results.length === 0 && <tr><td colspan="6"><p>No results</p></td></tr>}
+                {results.map((item) => (<FoodRow key={item.id} item={item} showAddButton onAdd={onAddFood} />))}
+                {results.length === 0 && <tr><td colSpan="6"><p>No results</p></td></tr>}
             </tbody>
         </table>
     )
