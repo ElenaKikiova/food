@@ -37,7 +37,7 @@ const Table = ({ items }) => {
                 </tr>
             </thead>
             <tbody>
-                {items.length > 0 && items.map((item) => <FoodRow item={item} />)}
+                {items.length > 0 && items.map((item) => <FoodRow key={item.id} item={item} />)}
             </tbody>
             <tfoot>
                 <tr>

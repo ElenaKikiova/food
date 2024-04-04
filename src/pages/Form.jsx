@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Form = ({ toggleForm, onSubmit }) => {
+const Form = () => {
 
     const [name, setName] = useState("");
     const [kcal, setKcal] = useState(0);
@@ -9,8 +10,9 @@ const Form = ({ toggleForm, onSubmit }) => {
     const [fat, setFat] = useState(0);
 
     const [errors, setErrors] = useState([])
+    const navigate = useNavigate()
 
-    const submit = (e) => {
+    const submit = async (e) => {
         e.preventDefault()
         setErrors([])
         let isValid = true
@@ -36,22 +38,28 @@ const Form = ({ toggleForm, onSubmit }) => {
         }
 
         if (isValid) {
-            onSubmit({
-                name,
-                kcal,
-                protein,
-                carbs,
-                fat
-            })
-            setName("")
-            setKcal(0)
-            setProtein(0)
-            setCarbs(0)
-            setFat(0)
+
+            try {
+                const res = await fetch(`http://localhost:3000/foods`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, kcal, protein, carbs, fat })
+                })
+                const data = await res.json()
+                if (data) {
+                    alert(`Product ${name} added successfully!`)
+                    navigate("/")
+                }
+            }
+            catch (err) {
+                console.log(err)
+            }
         }
     }
 
-    return toggleForm && (
+    return (
         <form>
             <label htmlFor="name">Name</label>
             <input name="name" type="text" value={name} onChange={(e) => setName(e.target.value)}></input>
@@ -67,6 +75,7 @@ const Form = ({ toggleForm, onSubmit }) => {
             {errors.map((error) => <p key={error} className="error">{error}</p>)}
 
             <button onClick={submit}>Create</button>
+            <button onClick={() => navigate("/")}>Cancel</button>
         </form>
     )
 

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Table from './components/Table';
 import Search from './components/Search';
 import ResultsTable from './components/ResultsTable';
-import Form from './components/Form';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
 
   const [items, setItems] = useState([]);
   const [results, setResults] = useState([])
-  const [toggleForm, setToggleForm] = useState(false)
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     onSearch("")
@@ -31,33 +32,11 @@ function App() {
     }
   }
 
-  const onCreateFood = async (food) => {
-    try {
-      const res = await fetch(`http://localhost:3000/foods`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(food)
-      })
-      const data = await res.json()
-      if (data) {
-        setToggleForm(false)
-        onSearch("")
-        alert(`Product ${food.name} added successfully!`)
-      }
-    }
-    catch (err) {
-      console.log(err, res)
-    }
-  }
-
   return (
     <div className="App">
       <Table items={items} />
       <Search onSearch={onSearch} />
-      <button onClick={() => setToggleForm(true)} className="toggleFormButton">Create food</button>
-      <Form toggleForm={toggleForm} onSubmit={onCreateFood} />
+      <button onClick={() => navigate("form")} className="toggleFormButton">Create food</button>
       <ResultsTable results={results} onAddFood={onAddFood} />
     </div>
   );
